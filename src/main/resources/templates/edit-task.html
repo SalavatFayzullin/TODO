@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Task</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+  <h1>Edit Task</h1>
+
+  <form th:action="@{/tasks/update/{id}(id=${task.id})}"
+        method="post"
+        th:object="${task}">
+    <input type="text" th:field="*{title}" required>
+    <button type="submit">Update</button>
+    <a href="/tasks">Cancel</a>
+  </form>
+</div>
+</body>
+</html>

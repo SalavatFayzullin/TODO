@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO App</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>My TODO List</h1>
+
+    <form th:action="@{/tasks/add}" method="post">
+        <input type="text" name="title" placeholder="New task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <div class="task-list" th:if="${not tasks.empty}">
+        <div class="task-item" th:each="task : ${tasks}">
+                <span th:class="${task.completed} ? 'completed' : ''"
+                      th:text="${task.title}"></span>
+
+            <div class="actions">
+                <a th:href="@{/tasks/toggle/{id}(id=${task.id})}">
+                    <span th:text="${task.completed} ? 'Undo' : 'Complete'"></span>
+                </a>
+                <a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit</a>
+                <a th:href="@{/tasks/delete/{id}(id=${task.id})}">Delete</a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${tasks.empty}">
+        <p>No tasks found. Add your first task!</p>
+    </div>
+</div>
+</body>
+</html>
