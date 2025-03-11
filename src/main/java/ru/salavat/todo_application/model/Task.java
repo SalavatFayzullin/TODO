@@ -15,6 +15,17 @@ public class Task {
     private String description;
     private boolean completed;
     private LocalDateTime createdAt;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private MyUser owner;
+
+    public MyUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(MyUser owner) {
+        this.owner = owner;
+    }
 
     @PrePersist
     protected void onCreate() {
